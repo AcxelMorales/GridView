@@ -14,19 +14,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var fruits: ArrayList<String> = ArrayList()
-        fruits.add("Manzana")
-        fruits.add("Platano")
-        fruits.add("Sandia")
-        fruits.add("Durazno")
+        val fruits: ArrayList<Fruit> = ArrayList()
+        fruits.add(Fruit("Manzana", R.drawable.manzana))
+        fruits.add(Fruit("Durazno", R.drawable.durazno))
+        fruits.add(Fruit("Sandia", R.drawable.sandia))
+        fruits.add(Fruit("Platano", R.drawable.platano))
 
-        var grid: GridView = findViewById(R.id.grid)
-        val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, fruits)
+        val list = findViewById<GridView>(R.id.grid)
 
-        grid.adapter = adapter
+        // list.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, fruits)
+        list.adapter = CustomAdapter(this, fruits)
 
-        grid.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
-            Toast.makeText(this, fruits[position], Toast.LENGTH_SHORT).show()
+        list.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
+            Toast.makeText(this, fruits[position].name, Toast.LENGTH_SHORT).show()
         }
     }
 
